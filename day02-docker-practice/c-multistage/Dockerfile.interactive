@@ -1,0 +1,23 @@
+# ==========================================
+# STAGE 1: Build Environment
+# ==========================================
+FROM alpine:3.19 AS builder
+
+RUN apk add --no-cache gcc musl-dev
+
+WORKDIR /build
+
+COPY interactive_calc.c .
+
+RUN gcc -static -o calc interactive_calc.c
+
+# ==========================================
+# STAGE 2: Runtime Environment
+# ==========================================
+FROM alpine:3.19
+
+WORKDIR /app
+
+COPY --from=builder /build/calc /app/calc
+
+CMD ["/app/calc"]
