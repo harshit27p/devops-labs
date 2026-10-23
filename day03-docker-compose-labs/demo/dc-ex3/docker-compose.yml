@@ -1,0 +1,17 @@
+services:
+  people_service:
+    build:
+      context: ./people
+    container_name: people_container
+    ports: ["7777:5000"]
+
+  books:
+    build:
+      context: ./books
+    container_name: books_container
+    ports: ["5001:5000"]
+    environment:
+      - PEOPLE_HOST=people_service
+      - PEOPLE_PORT=5000
+    depends_on: 
+      - people_service

@@ -1,0 +1,15 @@
+services:
+  db1:
+    image: mysql:9
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=TopSecret@1234"
+    restart: unless-stopped
+    volumes:
+      - db_vol:/var/lib/mysql
+
+volumes:
+  db_vol:
+    driver: local

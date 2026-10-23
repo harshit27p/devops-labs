@@ -1,0 +1,19 @@
+services:
+  categories:
+    image: "learnwithvinod/nw-categories"
+    ports:
+      - "8081:8080"
+    container_name: categories_container
+
+  shippers:
+    image: "learnwithvinod/nw-shippers"
+    ports:
+      - "8082:8080"
+    container_name: shippers_container
+
+  products:
+    image: "learnwithvinod/nw-products"
+    ports: ["8083:8080"]
+    container_name: products_container
+
+
