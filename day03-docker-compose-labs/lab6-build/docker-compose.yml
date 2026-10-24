@@ -1,0 +1,12 @@
+services:
+  custom-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: my-company/custom-api:1.0
+    container_name: build-api-server
+    ports:
+      - '8000:8000'
+    environment:
+      - APP_ENV=production
+    restart: unless-stopped

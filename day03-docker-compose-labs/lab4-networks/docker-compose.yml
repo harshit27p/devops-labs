@@ -1,0 +1,50 @@
+services:
+  # 1. Public-Facing Web Proxy
+  web:
+    image: nginx:alpine
+    container_name: net-web-proxy
+    ports:
+      - '80:80'
+    networks:
+      - frontend-net
+    depends_on:
+      - backend
+    restart: always
+
+  # 2. Application Backend API (Dual-Homed)
+  backend:
+    image: python:3.11-slim
+    container_name: net-api-server
+    command: >
+      sh -c "echo 'API ready...' &&
+      python -m http.server 5000"
+    ports:
+      - '5000:5000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    networks:
+      - frontend-net
+      - backend-net
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # 3. Private Isolated Database
+  db:
+    image: postgres:15-alpine
+    container_name: net-postgres-db
+    environment:
+      POSTGRES_DB: secure_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: SecretPassword123
+    networks:
+      - backend-net
+    restart: unless-stopped
+
+# Custom Bridge Networks Definition
+networks:
+  frontend-net:
+    driver: bridge
+  backend-net:
+    driver: bridge

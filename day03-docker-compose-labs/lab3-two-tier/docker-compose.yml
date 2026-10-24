@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Tier 1: Application Backend Service
+  backend:
+    image: python:3.11-slim
+    container_name: lab-api-server
+    command: >
+      sh -c "echo 'API Server starting...' &&
+      python -m http.server 5000"
+    ports:
+      - '5000:5000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=company_db
+      - DB_USER=db_admin
+      - DB_PASSWORD=SecretPassword123
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # Tier 2: Relational Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: lab-postgres-db
+    environment:
+      POSTGRES_DB: company_db
+      POSTGRES_USER: db_admin
+      POSTGRES_PASSWORD: SecretPassword123
+    # Security Rule: Do NOT expose database port 5432 to host!
+    restart: unless-stopped

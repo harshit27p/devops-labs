@@ -1,0 +1,32 @@
+services:
+  # Web tier with Bind Mounts
+  web:
+    image: nginx:alpine
+    container_name: store-web-server
+    ports:
+      - '8080:80'
+    volumes:
+      # Bind Mount: Host configuration -> Container (Read-Only)
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+      # Bind Mount: Host static HTML directory -> Container (Read-Only)
+      - ./html:/usr/share/nginx/html:ro
+    restart: always
+
+  # Database tier with Docker Named Volume
+  db:
+    image: postgres:15-alpine
+    container_name: store-postgres-db
+    environment:
+      POSTGRES_DB: customer_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: SecretPassword123
+    volumes:
+      # Named Volume: Persistent storage for database files
+      - db-persistent-data:/var/lib/postgresql/data
+    restart: always
+
+# Top-level Named Volumes declaration
+volumes:
+  db-persistent-data:
+    driver: local
