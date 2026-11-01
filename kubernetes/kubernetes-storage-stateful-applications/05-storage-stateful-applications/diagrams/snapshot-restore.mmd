@@ -1,0 +1,3 @@
+flowchart LR
+ A[Application PVC] --> B[VolumeSnapshot] --> C[Backend snapshot]
+ C --> D[Restore PVC] --> E[Recovery Pod] --> F[Validate application]

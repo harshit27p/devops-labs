@@ -1,0 +1,7 @@
+flowchart TD
+ A[Workload references PVC] --> B[PVC selects StorageClass]
+ B --> C[External provisioner] --> D[CSI controller]
+ D --> E[Storage backend]
+ E --> F[PV created and bound]
+ F --> G[CSI node plugin mounts]
+ G --> H[Container uses mount]

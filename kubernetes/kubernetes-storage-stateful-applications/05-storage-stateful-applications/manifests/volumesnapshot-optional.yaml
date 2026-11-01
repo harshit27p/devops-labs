@@ -1,0 +1,10 @@
+# OPTIONAL: requires snapshot.storage.k8s.io/v1, snapshot controller,
+# compatible CSI driver, and a real SnapshotClass.
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: app-data-snapshot
+spec:
+  volumeSnapshotClassName: replace-with-real-snapshot-class
+  source:
+    persistentVolumeClaimName: app-data

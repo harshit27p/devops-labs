@@ -1,0 +1,10 @@
+# ILLUSTRATIVE ONLY — NOT APPLY-READY.
+# Replace provisioner and parameters with the exact installed CSI driver's values.
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: example-csi-class
+provisioner: example.csi.invalid
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
