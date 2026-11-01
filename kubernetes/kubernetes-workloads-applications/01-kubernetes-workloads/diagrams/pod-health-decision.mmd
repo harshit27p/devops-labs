@@ -1,0 +1,12 @@
+flowchart TD
+    A[Container starts] --> B{Startup probe configured?}
+    B -- Yes --> C{Startup succeeds?}
+    C -- No --> R[Restart after failure threshold]
+    C -- Yes --> D[Run readiness and liveness]
+    B -- No --> D
+    D --> E{Readiness succeeds?}
+    E -- No --> F[Pod not Ready; remove from Service endpoints]
+    E -- Yes --> G[Pod eligible for traffic]
+    D --> H{Liveness succeeds?}
+    H -- No --> R
+    H -- Yes --> I[Continue running]

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: workloads-lab
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-report
+  namespace: workloads-lab
+spec:
+  completions: 1
+  parallelism: 1
+  backoffLimit: 2
+  activeDeadlineSeconds: 120
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        app: batch-report
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: report
+          image: busybox:1.36
+          command: ["sh", "-c", "echo 'Report started'; date; echo 'Report completed'"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 64Mi

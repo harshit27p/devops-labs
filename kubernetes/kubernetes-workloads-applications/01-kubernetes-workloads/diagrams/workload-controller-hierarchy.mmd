@@ -1,0 +1,12 @@
+flowchart TD
+    D[Deployment] --> RS[ReplicaSet]
+    RS --> P1[Pod]
+    RS --> P2[Pod]
+    RS --> P3[Pod]
+    SS[StatefulSet] --> S0[web-0]
+    SS --> S1[web-1]
+    DS[DaemonSet] --> N1[Pod on eligible Node 1]
+    DS --> N2[Pod on eligible Node 2]
+    J[Job] --> JP[Task Pod]
+    CJ[CronJob] --> J1[Scheduled Job]
+    J1 --> J2[Task Pod]
