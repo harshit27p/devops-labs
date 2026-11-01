@@ -1,0 +1,8 @@
+flowchart TD
+ A[Unscheduled Pod] --> B[Queue]
+ B --> C[Filter feasible nodes]
+ C --> D[Score nodes]
+ D --> E[Select and bind]
+ E --> F[Kubelet starts Pod]
+ C --> G[No feasible node]
+ G --> H[PostFilter / possible preemption]

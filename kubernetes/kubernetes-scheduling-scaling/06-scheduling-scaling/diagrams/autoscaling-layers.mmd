@@ -1,0 +1,8 @@
+flowchart TB
+ M[Metrics / demand] --> H[HPA changes replica count]
+ H --> P[Pods scheduled]
+ P -->|fit| N[Existing nodes]
+ P -->|cannot fit| C[Cluster Autoscaler / node provisioner]
+ C --> I[Infrastructure adds nodes]
+ I --> N
+ V[VPA recommendations / resource sizing] --> P
