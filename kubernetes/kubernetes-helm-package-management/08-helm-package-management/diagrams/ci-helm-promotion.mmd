@@ -1,0 +1,8 @@
+flowchart LR
+ A[Chart source] --> B[Lint and render]
+ B --> C[Policy and security checks]
+ C --> D[Package and publish]
+ D --> E[Deploy staging]
+ E --> F[Smoke tests]
+ F --> G[Promote same artifact]
+ G --> H[Production]

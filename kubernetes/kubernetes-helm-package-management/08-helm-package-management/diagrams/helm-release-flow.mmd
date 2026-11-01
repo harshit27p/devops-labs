@@ -1,0 +1,6 @@
+flowchart TD
+ A[Chart + values] --> B[Helm renders templates]
+ B --> C[Manifest validation / API request]
+ C --> D[Kubernetes stores resources]
+ D --> E[Controllers reconcile]
+ E --> F[Helm release revision]

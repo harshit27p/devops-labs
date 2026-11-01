@@ -1,0 +1,7 @@
+The release {{ .Release.Name }} has been deployed.
+
+Service:
+  {{ include "platform-web.fullname" . }}:{{ .Values.service.port }}
+
+Check status:
+  kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}

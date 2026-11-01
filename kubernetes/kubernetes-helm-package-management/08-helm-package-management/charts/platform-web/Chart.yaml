@@ -1,0 +1,7 @@
+apiVersion: v2
+name: platform-web
+description: A small example web application chart for Helm learning
+type: application
+version: 0.1.0
+appVersion: "1.27.5"
+kubeVersion: ">=1.25.0-0"

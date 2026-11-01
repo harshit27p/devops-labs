@@ -1,0 +1,9 @@
+# Common files to exclude from packaged charts
+.git/
+.gitignore
+.DS_Store
+*.swp
+*.bak
+*.tmp
+*.orig
+*.rej
