@@ -1,0 +1,6 @@
+flowchart LR
+    C[Client Pod] --> DNS[Cluster DNS]
+    DNS --> VIP[Service ClusterIP]
+    VIP --> DP[Service Dataplane]
+    DP --> E1[Ready Pod Endpoint A]
+    DP --> E2[Ready Pod Endpoint B]

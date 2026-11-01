@@ -1,0 +1,6 @@
+flowchart TD
+    S[Source Pod] --> P{NetworkPolicy selects destination?}
+    P -- No --> D[No policy isolation from this policy]
+    P -- Yes --> I{Traffic matches an allow rule?}
+    I -- Yes --> A[Traffic allowed]
+    I -- No --> X[Traffic denied]
