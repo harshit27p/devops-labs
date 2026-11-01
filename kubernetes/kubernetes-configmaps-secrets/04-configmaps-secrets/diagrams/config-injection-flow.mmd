@@ -1,0 +1,9 @@
+flowchart TD
+    CM[ConfigMap] --> E[Environment Variable]
+    CM --> V[Projected Volume File]
+    S[Secret] --> SE[Secret Environment Variable]
+    S --> SV[Secret Volume]
+    E --> P[Application Process]
+    V --> P
+    SE --> P
+    SV --> P
