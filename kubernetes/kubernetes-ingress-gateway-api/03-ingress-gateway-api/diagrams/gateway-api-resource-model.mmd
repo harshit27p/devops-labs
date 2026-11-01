@@ -1,0 +1,7 @@
+flowchart TD
+    GC[GatewayClass] --> GW[Gateway]
+    GW --> L[Listener]
+    L --> R[HTTPRoute]
+    R --> S1[Backend Service A]
+    R --> S2[Backend Service B]
+    RG[ReferenceGrant] -. authorizes cross-namespace references .-> R

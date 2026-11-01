@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-routing
+  namespace: networking-lab
+spec:
+  ingressClassName: example-controller # Replace with an installed IngressClass.
+  rules:
+    - host: app.example.test
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-v2
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-v1
+                port:
+                  number: 80

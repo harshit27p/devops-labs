@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: secure-demo
+  namespace: networking-lab
+spec:
+  ingressClassName: example-controller # Replace with an installed IngressClass.
+  tls:
+    - hosts:
+        - app.example.test
+      secretName: app-example-tls
+  rules:
+    - host: app.example.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-v1
+                port:
+                  number: 80

@@ -1,0 +1,6 @@
+flowchart LR
+    U[Client] --> DNS[DNS]
+    DNS --> LB[External Load Balancer]
+    LB --> IC[Ingress Controller]
+    IC --> S[ClusterIP Service]
+    S --> P[Ready Pod Endpoint]
