@@ -1,0 +1,20 @@
+flowchart TB
+    Client[User / CI / kubectl] --> Endpoint[Stable API endpoint]
+    Endpoint --> API[kube-apiserver]
+    API <--> ETCD[(etcd)]
+    API --> Scheduler[kube-scheduler]
+    API --> Controller[kube-controller-manager]
+    API --> Cloud[cloud-controller-manager - optional]
+    API <--> NodeA
+    API <--> NodeB
+    subgraph NodeA[Worker Node A]
+      KubeletA[kubelet] --> RuntimeA[Container runtime]
+      RuntimeA --> PodsA[Pods]
+      NetA[CNI / Service dataplane]
+    end
+    subgraph NodeB[Worker Node B]
+      KubeletB[kubelet] --> RuntimeB[Container runtime]
+      RuntimeB --> PodsB[Pods]
+      NetB[CNI / Service dataplane]
+    end
+    PodsA <--> PodsB

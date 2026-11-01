@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant User as kubectl
+    participant API as kube-apiserver
+    participant Auth as AuthN / AuthZ
+    participant Admission as Admission
+    participant Store as etcd
+    participant Controller as Controllers
+    participant Scheduler as Scheduler
+    participant Kubelet as kubelet
+    participant Runtime as Container runtime
+
+    User->>API: Submit manifest over HTTPS
+    API->>Auth: Authenticate and authorize
+    Auth-->>API: Identity and decision
+    API->>Admission: Mutate / validate
+    Admission-->>API: Accept or reject
+    API->>Store: Persist accepted object
+    Store-->>API: Commit
+    API-->>User: API response
+    API-->>Controller: Watch event
+    Controller->>API: Reconcile dependent objects
+    API-->>Scheduler: Unscheduled Pod
+    Scheduler->>API: Bind Pod to node
+    API-->>Kubelet: Pod assignment observed
+    Kubelet->>Runtime: Create Pod containers
+    Runtime-->>Kubelet: Runtime state
+    Kubelet->>API: Report Pod status
