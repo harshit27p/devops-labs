@@ -1,0 +1,7 @@
+flowchart TD
+  DETECT[Alert or report] --> TRIAGE[Validate and assess impact]
+  TRIAGE --> LEAD[Assign incident roles]
+  LEAD --> MITIGATE[Safe reversible mitigation]
+  MITIGATE --> VERIFY[Verify user-facing recovery]
+  VERIFY --> REVIEW[Blameless review]
+  REVIEW --> ACTIONS[Track corrective actions]

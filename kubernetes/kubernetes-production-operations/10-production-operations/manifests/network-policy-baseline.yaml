@@ -1,0 +1,11 @@
+# Example default-deny ingress policy. Apply only after designing explicit
+# allow policies for DNS, ingress, application dependencies, and monitoring.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: production-example
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress

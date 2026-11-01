@@ -1,0 +1,8 @@
+flowchart LR
+  PLAN[Plan and compatibility review] --> STAGE[Staging validation]
+  STAGE --> BACKUP[Backup and recovery check]
+  BACKUP --> UPGRADE[Control plane and add-on upgrade]
+  UPGRADE --> NODES[Node pool rotation]
+  NODES --> VERIFY[Workload and SLO validation]
+  VERIFY -->|Healthy| COMPLETE[Close change]
+  VERIFY -->|Degraded| STOP[Stop and execute recovery plan]
