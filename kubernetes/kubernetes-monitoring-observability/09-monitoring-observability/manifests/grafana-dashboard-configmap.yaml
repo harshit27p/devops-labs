@@ -1,0 +1,29 @@
+# Example dashboard ConfigMap. Grafana needs a configured dashboard provider
+# or sidecar that imports ConfigMaps with this label.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-overview-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  demo-overview.json: |
+    {
+      "title": "Demo Workload Overview",
+      "uid": "demo-workload-overview",
+      "schemaVersion": 39,
+      "version": 1,
+      "panels": [
+        {
+          "id": 1,
+          "title": "Prometheus targets up",
+          "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "targets": [{"expr": "up", "legendFormat": "{{job}} / {{instance}}"}],
+          "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0}
+        }
+      ],
+      "time": {"from": "now-1h", "to": "now"},
+      "timezone": "browser"
+    }

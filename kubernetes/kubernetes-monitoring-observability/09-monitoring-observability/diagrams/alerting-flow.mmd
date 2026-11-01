@@ -1,0 +1,8 @@
+flowchart LR
+  M[Metrics] --> P[Prometheus]
+  P --> R[Rule evaluation]
+  R -->|Firing alert| A[Alertmanager]
+  A --> G[Grouping and deduplication]
+  G --> RT[Routing]
+  RT --> N[Notification receiver]
+  S[Silence / inhibition] --> A

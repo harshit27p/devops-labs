@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph Cluster[Kubernetes cluster]
+    APP[Applications]
+    KSM[kube-state-metrics]
+    NODE[node-exporter]
+    KUBE[Kubelet and control plane]
+    LOG[Container logs]
+  end
+  APP -->|/metrics| PROM[Prometheus]
+  KSM --> PROM
+  NODE --> PROM
+  KUBE --> PROM
+  PROM --> G[Grafana]
+  PROM --> AM[Alertmanager]
+  LOG --> COL[Log collector]
+  COL --> LOKI[Log backend]
+  APP --> OTEL[OpenTelemetry Collector]
+  OTEL --> TRACE[Trace backend]

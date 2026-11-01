@@ -1,0 +1,22 @@
+# Requires Prometheus Operator CRDs and a Prometheus resource that selects
+# ServiceMonitors in namespace observability-demo with label release: monitoring.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sample-app
+  namespace: observability-demo
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: sample-app
+  namespaceSelector:
+    matchNames:
+      - observability-demo
+  endpoints:
+    # The selected Service must expose a port named "metrics" and the app
+    # must serve Prometheus metrics at /metrics. Adapt to your app.
+    - port: metrics
+      path: /metrics
+      interval: 30s

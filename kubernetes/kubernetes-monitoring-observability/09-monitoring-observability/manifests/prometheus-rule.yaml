@@ -1,0 +1,23 @@
+# Requires Prometheus Operator CRDs, kube-state-metrics, and a Prometheus
+# resource that selects PrometheusRules carrying label release: monitoring.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: demo-workload-alerts
+  namespace: observability-demo
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: demo-workload.rules
+      rules:
+        - alert: DeploymentReplicasUnavailable
+          expr: kube_deployment_status_replicas_unavailable{namespace="observability-demo"} > 0
+          for: 5m
+          labels:
+            severity: warning
+            team: platform
+          annotations:
+            summary: "Deployment has unavailable replicas"
+            description: "A Deployment in observability-demo has unavailable replicas for more than five minutes."
+            runbook_url: "https://example.invalid/runbooks/deployment-replicas-unavailable"
