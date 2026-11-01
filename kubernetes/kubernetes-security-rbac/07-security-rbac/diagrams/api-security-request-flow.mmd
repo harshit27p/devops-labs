@@ -1,0 +1,6 @@
+flowchart TD
+ A[API request] --> B[Authentication]
+ B --> C[Authorization / RBAC]
+ C --> D[Admission]
+ D --> E[Persist]
+ E --> F[Controllers reconcile]

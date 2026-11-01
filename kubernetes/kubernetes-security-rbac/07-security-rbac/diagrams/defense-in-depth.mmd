@@ -1,0 +1,7 @@
+flowchart TB
+ A[Identity and authentication] --> B[RBAC authorization]
+ B --> C[Admission policy]
+ C --> D[Pod and container hardening]
+ D --> E[Network isolation]
+ E --> F[Image and supply-chain controls]
+ F --> G[Audit and runtime detection]
