@@ -1,0 +1,12 @@
+timestamp,service,level,event,duration_ms
+2026-11-02T09:00:00Z,web,INFO,request_completed,120
+2026-11-02T09:01:00Z,web,INFO,request_completed,135
+2026-11-02T09:02:00Z,api,WARNING,retry_attempted,240
+2026-11-02T09:03:00Z,api,INFO,request_completed,155
+2026-11-02T09:04:00Z,web,INFO,request_completed,118
+2026-11-02T09:05:00Z,api,ERROR,dependency_timeout,2400
+2026-11-02T09:06:00Z,api,CRITICAL,queue_backlog,3100
+2026-11-02T09:07:00Z,web,ERROR,upstream_failure,1800
+2026-11-02T09:08:00Z,api,WARNING,retry_attempted,450
+2026-11-02T09:09:00Z,web,INFO,request_completed,142
+2026-11-02T09:10:00Z,api,INFO,request_completed,160
